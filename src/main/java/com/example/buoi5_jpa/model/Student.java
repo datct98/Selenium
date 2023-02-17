@@ -1,6 +1,5 @@
 package com.example.buoi5_jpa.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +10,16 @@ import java.util.Set;
 @Table
 @Getter
 @Setter
-public class Teacher {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @Column(name = "account_num")
-    private String accountNum;
-    @JsonBackReference
-    @ManyToMany(mappedBy = "teachers")
-    private Set<Clasz> claszs;
+    private String email;
+    private String phone;
+
+    @Column(columnDefinition = "varchar(30) default 'studying'", nullable = false)
+    private String status;
+    @ManyToMany(mappedBy = "students")
+    private Set<Course> courses;
 }
